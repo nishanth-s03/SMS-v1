@@ -1,0 +1,22 @@
+<!-- show_cld_img.ejs -->
+
+<h1 class="mt-4">Your Searched Image</h1>
+
+<% if (images.length> 0) { %>
+    <div class="row">
+        <% images.forEach(image=> { %>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="<%= image.imageUrl %>" alt="<%= image.name %>">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <%= image.name %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+    <% } else { %>
+        <p>No images to display.</p>
+        <% } %>

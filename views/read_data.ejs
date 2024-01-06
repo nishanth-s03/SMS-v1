@@ -1,0 +1,271 @@
+<!-- students.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Details</title>
+
+    <style>
+        h1 {
+            text-align: center;
+            color: rgb(0, 0, 0);
+            font-size: 50px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .division {
+            background-color: rgb(215, 212, 242);
+            /* Lighter background color for a cleaner look */
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Reduced box shadow for a subtle effect */
+            border-radius: 8px;
+            /* Rounded corners for a modern appearance */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .division:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .details input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .details input:focus {
+            border-color: #4CAF50;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            margin-left: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #d5204a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #ec2f3b;
+        }
+
+        input {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid black;
+            width: 200px;
+            height: 30px;
+            font-size: 20px;
+            color: black;
+        }
+
+        .upd {
+            margin-left: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+
+        }
+
+        .upd:hover {
+            background-color: #1bc958;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Staff Details</h1>
+    <!-- <ul>
+        <% allusers.forEach(student=> { %>
+            <div class="divison" id="item1">
+                <li>Name: <%= student.name %>, Email: <%= student.email %>, Role: <%= student.role %>
+                                <button class="btn" id="delete"
+                                    onclick="deleteFromDatabase('<%= student.name %>');deleteItem(this)">DELETE</button>
+                                <button class="btn" id="update"
+                                    onclick="updateDatabase('<%= student.name %>')">UPDATE</button>
+                </li>
+            </div>
+            <% }); %>
+    </ul> -->
+    <ul>
+        <% allusers.forEach(student=> { %>
+            <div class="division" id="item_<%= student.name %>">
+                <li>
+                    <div class="details">
+                        <!-- Read-only input fields -->
+                        <input type="text" id="name_<%= student.name %>" value="<%= student.name %>" readonly />
+                        <input type="text" id="email_<%= student.name %>" value="<%= student.email %>" readonly />
+                        <input type="text" id="role_<%= student.name %>" value="<%= student.role %>" readonly />
+                    </div>
+
+                    <div class="actions">
+                        <!-- Buttons for actions -->
+                        <button class="btn btn-delete" id="delete_<%= student.name %>"
+                            onclick="deleteFromDatabase('<%= student.name %>'); deleteItem(this)">DELETE</button>
+                        <button class="upd" class="btn btn-update" id="update_<%= student.name %>"
+                            onclick="toggleEditMode('<%= student.name %>')">UPDATE</button>
+                    </div>
+                </li>
+            </div>
+            <% }); %>
+    </ul>
+
+
+
+    <script>
+        function toggleEditMode(studentName) {
+            var nameInput = document.getElementById('name_' + studentName);
+            var emailInput = document.getElementById('email_' + studentName);
+            var roleInput = document.getElementById('role_' + studentName);
+
+            // Toggle readonly property
+            nameInput.readOnly = !nameInput.readOnly;
+            emailInput.readOnly = !emailInput.readOnly;
+            roleInput.readOnly = !roleInput.readOnly;
+
+            // Change the text of the "UPDATE" button based on the readonly state
+            var updateButton = document.getElementById('update_' + studentName);
+            updateButton.innerHTML = nameInput.readOnly ? 'UPDATE' : 'SAVE';
+
+            // If in edit mode, update the click event to trigger the save function
+            if (!nameInput.readOnly) {
+                updateButton.onclick = function () {
+                    updateDatabase(studentName, emailInput, roleInput);
+                };
+            } else {
+                // If in readonly mode, revert the click event to toggle edit mode
+                updateButton.onclick = function () {
+                    toggleEditMode(studentName);
+                };
+            }
+        }
+    </script>
+
+
+    <!-- we can use either query parameter or ajax method -->
+
+    <!-- <script>
+        function deleteFromDatabase() {
+            fetch(`http://localhost:3000/delete?name=${"manish"}`)
+                .then(response =>
+                    response.text()
+                );
+        }
+    </script> -->
+
+    <script>
+        function deleteFromDatabase(name) {
+
+            var confirmDelete = window.confirm("Are you sure you want to delete '" + name + "'? The deleted data can't be returned.");
+
+            if (confirmDelete) {
+                // Send an AJAX request to the server to delete the user from the database
+                fetch('http://localhost:3000/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: name }),
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data);
+                        // You can handle the response as needed
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                alert("Data not deleted");
+            }
+
+        }
+    </script>
+
+    <script>
+        // Function to delete the parent list item when the delete button is clicked
+        function deleteItem(button) {
+            var listItem = button.parentNode; // Get the parent <li> element
+            var div = listItem.parentNode;    // Get the parent <div> element
+
+            // Remove the div element (which contains the li)
+            div.parentNode.removeChild(div);
+            // var list = button.parentNode;
+            // list.removeChild(button);
+            location.reload();
+        }
+
+    </script>
+
+
+    <script>
+        function updateDatabase(name, email, role) {
+
+            var nameValue = document.getElementById("name_" + name).value;
+            var emailValue = document.getElementById("email_" + name).value;
+            var roleValue = document.getElementById("role_" + name).value;
+
+            console.log(nameValue);
+            console.log(emailValue);
+            console.log(roleValue);
+
+            var dataObject = {
+                name: name,
+                email: emailValue,
+                role: roleValue
+            };
+
+            toggleEditMode(nameValue);
+
+            // Send an AJAX request to the server to delete the user from the database
+            fetch('http://localhost:3000/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataObject),
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    // You can handle the response as needed
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet " href="https://unpkg.com/boxicons@latest/css/boxicons.min.css ">
+    <link rel="stylesheet " href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css ">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js "></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        * {
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+
+        :root {
+            --grey-color: #b1adad;
+            --border-color: #e7e8ea;
+            --primary-color: #3498db;
+            --hover-color: #2980b9;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            /* Added space at the top */
+        }
+
+        /*----- Left SideBar -----*/
+
+        .left_sidebar {
+            flex-basis: 15%;
+            /* Decreased the size of the left sidebar */
+            position: sticky;
+            top: 0px;
+            align-self: flex-start;
+            transition: all .3s ease-in-out;
+        }
+
+        .left_sidebar .close_hamburger_btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 34px;
+            cursor: pointer;
+            color: #000;
+            display: none;
+        }
+
+        .left_sidebar .logo h2 {
+            padding: 20px 30px;
+            font-weight: 600;
+            font-size: 32px;
+            font-style: italic;
+        }
+
+        .left_sidebar .menu_items .menu_item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            color: var(--grey-color);
+            padding: 20px 30px;
+            cursor: pointer;
+        }
+
+        /*----- Main Content -----*/
+
+        .main_content {
+            flex-basis: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 0 20px;
+            transition: all .3s ease-in-out;
+            overflow-y: scroll;
+        }
+
+        .table {
+            overflow-x: auto;
+        }
+
+        .table table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table th,
+        .table td {
+            padding: 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .table th {
+            background-color: var(--primary-color);
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .table tr:nth-child(even) {
+            background: #f1f8f8;
+        }
+
+        .table tr:nth-child(4) {
+            background: #5bb9c0;
+            color: #fff;
+        }
+
+        .table img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .table .profile_name {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .table tr:hover {
+            background-color: var(--hover-color);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container ">
+        <div class="left_sidebar">
+            <div class="close_hamburger_btn">
+                <i class='bx bx-x-circle'></i>
+            </div>
+            <div class="logo ">
+                <h2 onclick="myFunction()">School</h2>
+            </div>
+            <div class="menu_items ">
+                <div class="menu_item ">
+                    <i class='bx bxs-dashboard'></i>
+                    <p>Dashboard</p>
+                </div>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Class</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr>
+                        <td class="profile_name">John Doe</td>
+                        <td>001</td>
+                        <td>Class A</td>
+                        <td>18</td>
+                        <td>Male</td>
+                        <td>john.doe@example.com</td>
+                    </tr>
+                    <!-- Add more table rows as needed -->
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

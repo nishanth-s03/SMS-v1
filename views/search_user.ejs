@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+
+        }
+
+        tr:hover {
+            background-color: #ece1e1;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Search Student By Name</h1>
+        <form method="post" action="/search">
+            <div class="form-group">
+                <label for="search">Search:</label>
+                <input type="text" class="form-control" id="search" name="searchTerm" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <div id="searchResults" class="mt-4">
+            <% if (data.length> 0) { %>
+                <h2>Search Results:</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>USN</th>
+                                <th>Branch</th>
+                                <th>Fees Paid</th>
+                                <th>Fees Due</th>
+                                <th>Fees State</th>
+                                <!-- Add other fields as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.forEach(item=> { %>
+                                <tr>
+                                    <td>
+                                        <%= item.fname %>
+                                    </td>
+                                    <td>
+                                        <%= item.usn %>
+                                    </td>
+                                    <td>
+                                        <%= item.branch %>
+                                    </td>
+                                    <td>
+                                        <%= item.feespaid %>
+                                    </td>
+                                    <td>
+                                        <%= item.feesdue %>
+                                    </td>
+                                    <td style="<%= item.feesState === 'pending' ? 'color: red;' : '' %>">
+                                        <%= item.feesState %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } else { %>
+                    <p>No results found.</p>
+                    <% } %>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery CDN (place them at the end of the body for better performance) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

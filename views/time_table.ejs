@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(45deg, #362a3c, #425fc6);
+            font-family: sans-serif;
+            font-weight: 100;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+        }
+
+        table {
+            width: 800px;
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        thead {
+            th {
+                background-color: #55608f;
+            }
+        }
+
+
+        tbody {
+            tr {
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.3);
+                }
+            }
+
+            .SPM {
+                position: relative;
+                /* Ensure inline-block display to contain the tooltip */
+            }
+
+            .SPM:hover::before {
+                content: "Software Project Management \A Sunith Kumar  ";
+                /* Tooltip content */
+                position: absolute;
+                top: 100%;
+                /* Adjust the distance from the top */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 200px;
+                /* Adjust the width of the tooltip */
+                padding: 10px;
+                background-color: #fff;
+                /* Tooltip background color */
+                color: #333;
+                /* Tooltip text color */
+                border: 1px solid #ccc;
+                /* Tooltip border */
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                /* Tooltip box shadow */
+                z-index: 2;
+                text-align: center;
+                /* Adjust text alignment */
+                font-size: 14px;
+                /* Adjust font size */
+            }
+
+
+
+            .IOT {
+                position: relative;
+                /* Ensure inline-block display to contain the tooltip */
+            }
+
+            .IOT:hover::before {
+                content: "Internet of Things \A Anandh Sir";
+                /* Tooltip content with line breaks */
+                white-space: pre-line;
+                /* Tooltip content */
+                position: absolute;
+                top: 100%;
+                /* Adjust the distance from the top */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 200px;
+                /* Adjust the width of the tooltip */
+                padding: 10px;
+                background-color: #fff;
+                /* Tooltip background color */
+                color: #333;
+                /* Tooltip text color */
+                border: 1px solid #ccc;
+                /* Tooltip border */
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                /* Tooltip box shadow */
+                z-index: 2;
+                text-align: center;
+                /* Adjust text alignment */
+                font-size: 14px;
+                /* Adjust font size */
+            }
+
+            .CC {
+                position: relative;
+                /* Ensure inline-block display to contain the tooltip */
+            }
+
+            .CC:hover::before {
+                content: "Cloud Computing\A Nithish Sir";
+                /* Tooltip content with line breaks */
+                white-space: pre-line;
+                /* Tooltip content */
+                position: absolute;
+                top: 100%;
+                /* Adjust the distance from the top */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 200px;
+                /* Adjust the width of the tooltip */
+                padding: 10px;
+                background-color: #fff;
+                /* Tooltip background color */
+                color: #333;
+                /* Tooltip text color */
+                border: 1px solid #ccc;
+                /* Tooltip border */
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                /* Tooltip box shadow */
+                z-index: 2;
+                text-align: center;
+                /* Adjust text alignment */
+                font-size: 14px;
+                /* Adjust font size */
+            }
+
+            .CN {
+                position: relative;
+                /* Ensure inline-block display to contain the tooltip */
+            }
+
+            .CN:hover::before {
+                content: "Computer Networking \A Murari Sir";
+                /* Tooltip content with line breaks */
+                white-space: pre-line;
+                /* Tooltip content */
+                position: absolute;
+                top: 100%;
+                /* Adjust the distance from the top */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 200px;
+                /* Adjust the width of the tooltip */
+                padding: 10px;
+                background-color: #fff;
+                /* Tooltip background color */
+                color: #333;
+                /* Tooltip text color */
+                border: 1px solid #ccc;
+                /* Tooltip border */
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                /* Tooltip box shadow */
+                z-index: 2;
+                text-align: center;
+                /* Adjust text alignment */
+                font-size: 14px;
+                /* Adjust font size */
+            }
+
+
+            .SPM {
+                background-color: #99965a;
+            }
+
+            .CN {
+                background-color: #9798e2;
+            }
+
+            .CN_IOT_Lab {
+                background-color: #2ecc71;
+            }
+
+            .AJ {
+                background-color: #e74c3c;
+            }
+
+            .CC {
+                background-color: #f39c12;
+            }
+
+            .ACE {
+                background-color: #9b59b6;
+            }
+
+            .IOT {
+                background-color: #c74e67;
+            }
+
+            .Break {
+                background-color: rgb(96, 157, 174);
+            }
+
+            .Lunch {
+                background-color: rgb(96, 157, 174);
+            }
+
+            .Internship {
+                background-color: #f3b681;
+            }
+
+            .CN_JAVA_Lab {
+                background-color: #2ecc71;
+            }
+
+            .JAVA_IOT_Lab {
+                background-color: #2ecc71;
+            }
+
+            .Project {
+                background-color: #5996e1;
+            }
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: "Segoe UI", Roboto, sans-serif, monospace;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            color: #212529;
+            background-color: #ffd54f;
+            font-weight: 300;
+        }
+
+        .datecontainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: auto;
+            margin-left: 900px;
+        }
+
+        */ .date {
+            font-size: 1rem;
+        }
+
+        .day-name {
+            padding-top: 0.5rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .day {
+            letter-spacing: 0.3em;
+            margin-right: -0.3em;
+        }
+
+        .clock {
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 400;
+            gap: 5rem;
+        }
+
+        .clock-col {
+            text-align: center;
+        }
+
+        .clock-label {
+            gap: 11rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        input[type="checkbox"] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+
+        .container--btn {
+            display: flex;
+            flex: row;
+            align-items: end;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .btn {
+            display: block;
+            width: 50px;
+            height: 25px;
+            background-color: #fff;
+            border-radius: 100px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn::before {
+            position: absolute;
+            content: "";
+            background-color: #4f79ff;
+            width: 22.5px;
+            height: 22.5px;
+            margin: 1.25px;
+            border-radius: 100px;
+            transition: 0.3s;
+        }
+
+        input:checked+.btn::before {
+            transform: translateX(25px);
+        }
+
+        .grid--3-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid--4-col {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Time/Day</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>9:00-9:55</td>
+                    <td class="SPM">SPM</td>
+                    <td class="CN_IOT_Lab">CN/IOT Lab</td>
+                    <td class="AJ">AJ</td>
+                    <td class="CC">CC</td>
+                    <td class="AJ">AJ</td>
+                </tr>
+                <tr>
+                    <td>9:55-10:50</td>
+                    <td class="IOT">IOT</td>
+                    <td class="CN_IOT_Lab">CN/IOT Lab</td>
+                    <td class="CN">CN</td>
+                    <td class="IOT">IOT</td>
+                    <td class="SPM">SPM</td>
+                </tr>
+                <tr>
+                    <td>10:50-11:10</td>
+                    <td colspan="6" class="Break" data-tooltip="Break Time">Break</td>
+                </tr>
+                <tr>
+                    <td>11:10-12:05</td>
+                    <td class="ACE">ACE</td>
+                    <td class="CN_IOT_Lab">CN/IOT Lab</td>
+                    <td class="CC">CC</td>
+                    <td class="CN">CN</td>
+                    <td class="IOT">IOT</td>
+                </tr>
+                <tr>
+                    <td>12:05-1:00</td>
+                    <td class="CN">CN</td>
+                    <td class="CC">CC</td>
+                    <td></td>
+                    <td class="SPM">SPM</td>
+                    <td class="ACE">ACE</td>
+                </tr>
+                <tr>
+                    <td>1:00-2:00</td>
+                    <td colspan="6" class="Lunch" data-tooltip="Lunch Time">Lunch</td>
+                </tr>
+                <tr>
+                    <td>2:00-3:00</td>
+                    <td class="Internship">Internship</td>
+                    <td class="AJ">AJ</td>
+                    <td class="CN_JAVA_Lab">CN/JAVA Lab </td>
+                    <td class="JAVA_IOT_Lab">JAVA/IOT Lab</td>
+                    <td class="Project">Project</td>
+                </tr>
+                <tr>
+                    <td>3:00-4:00</td>
+                    <td class="Internship">Internship</td>
+                    <td></td>
+                    <td class="CN_JAVA_Lab">CN/JAVA Lab </td>
+                    <td class="JAVA_IOT_Lab">JAVA/IOT Lab</td>
+                    <td class="Project">Project</td>
+                </tr>
+                <tr>
+                    <td>4:00-5:00</td>
+                    <td class="Internship">Internship</td>
+                    <td></td>
+                    <td class="CN_JAVA_Lab">CN/JAVA Lab </td>
+                    <td class="JAVA_IOT_Lab">JAVA/IOT Lab</td>
+                    <td class="Project">Project</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="datecontainer">
+        <div class="date">
+            <p id="date"></p>
+        </div>
+        <div class="day-name">
+            <p class="day" id="day"></p>
+        </div>
+        <div class="clock grid--4-col">
+            <div class="clock-col">
+                <p id="hours"></p>
+                <p class="clock-label">Hours</p>
+            </div>
+            <div class="clock-col">
+                <p id="minutes"></p>
+                <p class="clock-label">Minutes</p>
+            </div>
+            <div class="clock-col">
+                <p id="seconds"></p>
+                <p class="clock-label">Seconds</p>
+            </div>
+            <div class="clock-col session">
+                <p id="session"></p>
+            </div>
+        </div>
+        <div class="container--btn el">
+            <!-- <p>12-hours</p> -->
+            <div class="toggle-btn">
+                <input class="checkbox" type="checkbox" id="toggle-btn" />
+                <!-- <label class="btn" for="toggle-btn"></label> -->
+            </div>
+            <!-- <p>24-hours</p> -->
+        </div>
+    </div>
+
+
+    <script>
+        const hours = document.getElementById("hours");
+        const minutes = document.getElementById("minutes");
+        const seconds = document.getElementById("seconds");
+        const date = document.getElementById("date");
+        const today = document.getElementById("day");
+        const sessions = document.getElementById("session");
+        const button = document.getElementById("toggle-btn");
+
+        const clock = document.querySelector(".clock");
+        const session = document.querySelector(".session");
+
+        const checkTime = function (time) {
+            return (time = time < 10 ? "0" + time : time);
+        };
+
+        const checkSession = (hrs) => {
+            return hrs === 0 ? 12 : (hrs > 12 ? hrs - 12 : hrs);
+        };
+
+        const time = function (hrs, mins, sec, session) {
+            hours.innerHTML = `${checkTime(hrs)}`;
+            minutes.innerHTML = `${checkTime(mins)}`;
+            seconds.innerHTML = `${checkTime(sec)}`;
+            sessions.innerHTML = `${session}`;
+        };
+
+        let weekday = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ][new Date().getDay()];
+
+        const displayDate = function () {
+            const now = new Date();
+            console.log(now);
+            const year = now.getFullYear();
+            const month = now.toLocaleString("en-us", { month: "long" });
+            const day = now.getDate();
+
+            console.log(now.toDateString());
+            date.innerHTML = `${month.toUpperCase()} ${day}, ${year}`;
+            today.innerHTML = `${weekday.toUpperCase()}`;
+        };
+        displayDate();
+
+        const displayTime = function () {
+            const tick = function () {
+                const now = new Date();
+
+                const hrs = now.getHours();
+                const mins = now.getMinutes();
+                const sec = now.getSeconds();
+                const session = hrs < 12 ? "AM" : "PM";
+
+                button.checked
+                    ? time(hrs, mins, sec, session)
+                    : time(checkSession(hrs), mins, sec, session);
+            };
+            tick();
+            setInterval(tick, 1000);
+        };
+        displayTime();
+
+        button.addEventListener("click", function () {
+            clock.classList.toggle("grid--3-col");
+            clock.classList.toggle("grid--4-col");
+            session.classList.toggle("hidden");
+        });
+    </script>
+</body>
+
+</html>

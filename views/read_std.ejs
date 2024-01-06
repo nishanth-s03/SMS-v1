@@ -1,0 +1,278 @@
+<!-- views/dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        .container {
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-left: 500px;
+            margin-right: 200px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border: 1.7px solid black;
+            background-color: rgb(224, 235, 244);
+            padding: 5px;
+
+        }
+
+        tbody {
+            text-align: center;
+            border: 1.7px solid black;
+        }
+
+        tr {
+            border: 1.7px solid black;
+        }
+
+        td {
+            border: 1.7px solid black;
+        }
+
+        canvas {
+            margin-top: 10px;
+            /* Adjusted margin-top */
+            margin-bottom: 10px;
+            /* Adjusted margin-bottom */
+            display: inline-block;
+            /* border: 1px solid black;
+            background-color: rgb(224, 235, 244); */
+        }
+
+        #genderChart {
+            margin-left: 600px;
+            margin-right: 600px;
+        }
+
+        #feesStateChart {
+            margin-left: 600px;
+            margin-right: 600px;
+        }
+
+        .contain {
+            background-color: rgb(224, 235, 244);
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Student Details</h1>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Father's Name</th>
+                    <th>Mother's Name</th>
+                    <th>Religion</th>
+                    <th>Present Address</th>
+                    <th>Permanent Address</th>
+                    <th>Nationality</th>
+                    <th>USN</th>
+                    <th>Branch</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% students.forEach(student=> { %>
+                    <tr class="table-row">
+                        <td>
+                            <%= student.fname %>
+                        </td>
+                        <td>
+                            <%= student.lname %>
+                        </td>
+                        <td>
+                            <%= new Date(student.dob).toLocaleDateString() %>
+                        </td>
+                        <td>
+                            <%= student.gender %>
+                        </td>
+                        <td>
+                            <%= student.email %>
+                        </td>
+                        <td>
+                            <%= student.phone %>
+                        </td>
+                        <td>
+                            <%= student.fatherName %>
+                        </td>
+                        <td>
+                            <%= student.motherName %>
+                        </td>
+                        <td>
+                            <%= student.religion %>
+                        </td>
+                        <td>
+                            <%= student.presentAddress %>
+                        </td>
+                        <td>
+                            <%= student.permanentAddress %>
+                        </td>
+                        <td>
+                            <%= student.nationality %>
+                        </td>
+                        <td>
+                            <%= student.usn %>
+                        </td>
+                        <td>
+                            <%= student.branch %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="contain">
+        <canvas id="genderChart"></canvas>
+        <div>
+            <h3 class="text-center">Gender Chart</h3>
+        </div>
+    </div>
+    <div class="contain">
+        <canvas id="feesStateChart" width="400" height="400"></canvas>
+        <div>
+            <h3 class="text-center">Fees Chart</h3>
+        </div>
+    </div>
+
+
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Add jQuery for hover effect -->
+    <script>
+        $(document).ready(function () {
+            $(".table-row").hover(
+                function () {
+                    $(this).addClass("table-row-hover");
+                },
+                function () {
+                    $(this).removeClass("table-row-hover");
+                }
+            );
+        });
+    </script>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('/api/std_data'); // Replace with your API endpoint
+                const studentsData = await response.json();
+                console.log(studentsData);
+                // Call the function with your student data
+                createGenderPieChart(studentsData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Call the function to fetch data
+        fetchData();
+
+        // Function to count gender occurrences and create the pie chart
+        function createGenderPieChart(data) {
+            const genderData = {
+                male: 0,
+                female: 0,
+            };
+
+            // Count gender occurrences
+            data.forEach(student => {
+                genderData[student.gender]++;
+            });
+
+            // Extract values and labels for the chart
+            const labels = Object.keys(genderData);
+            const values = Object.values(genderData);
+
+            // Create a pie chart
+            const ctx = document.getElementById('genderChart').getContext('2d');
+            const genderChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['blue', 'green'], // Colors for male and female
+                    }],
+                },
+            });
+        }
+
+        // Call the function with your student data
+        createGenderPieChart(studentsData);
+    </script>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('/api/std_data'); // Replace with your API endpoint
+                const studentsData = await response.json();
+                console.log(studentsData);
+                // Call the function with your student data
+                createFeesStatePieChart(studentsData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Call the function to fetch data
+        fetchData();
+
+        // Function to count feesState occurrences and create the pie chart
+        function createFeesStatePieChart(data) {
+            const feesStateData = {
+                finished: 0,
+                pending: 0,
+            };
+
+            // Count feesState occurrences
+            data.forEach(student => {
+                feesStateData[student.feesState]++;
+            });
+
+            // Extract values and labels for the chart
+            const labels = Object.keys(feesStateData);
+            const values = Object.values(feesStateData);
+
+            // Create a pie chart
+            const ctx = document.getElementById('feesStateChart').getContext('2d');
+            const feesStateChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: ['green', 'red'], // Colors for finished and pending
+                    }],
+                },
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>

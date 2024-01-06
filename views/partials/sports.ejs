@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator Form</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #7888e5, #667292);
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .main-container {
+            border: 2px solid #333;
+            margin: 50px auto;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 400px;
+            background-color: #f9f5f5;
+            box-shadow: 0 0 10px rgba(118, 86, 86, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            color: #333;
+        }
+
+        label {
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        input {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container main-container">
+        <h1>Sports</h1>
+        <form action="/certificate_generate" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signature">Signature:</label>
+                <input type="text" class="form-control" id="signature" name="signature" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event">Event Name:</label>
+                <input type="text" class="form-control" id="event" name="event" required>
+            </div>
+
+            <input type="hidden" id="additionalData" name="additionalData" value="sports">
+
+            <!-- <div class="form-group">
+                <label for="USN">USN:</label>
+                <input type="text" class="form-control" id="USN" name="USN" required>
+            </div> -->
+
+            <button class="btn btn-success btn-block" type="submit">Generate Certificate</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

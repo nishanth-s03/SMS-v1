@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            /* Light gray background */
+        }
+
+        .certificate {
+            width: 297mm;
+            height: 210mm;
+            border: 10px solid #3498db;
+            /* Border color */
+            border-radius: 20px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            /* Light blue background */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            /* Box shadow */
+        }
+
+        .certificate h1,
+        .certificate p {
+            text-align: center;
+            margin: 10px 0;
+            color: #2c3e50;
+            /* Dark gray text color */
+        }
+
+        h2,
+        h3 {
+            text-align: center;
+            color: #3498db;
+            /* Blue heading color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="certificate">
+        <h1>Certificate of Achievement in General</h1>
+        <p>This is to certify that</p>
+        <h2><strong><span id="name" style="color: #e74c3c;">
+                    <%= name %>
+                </span></strong></h2>
+        <p>has successfully participated in the event</p>
+        <h3><strong><span id="eventName" style="color: #27ae60;">
+                    <%= event %>
+                </span></strong></h3>
+        <p>held on</p>
+        <p><span id="date">
+                <%= date %>
+            </span></p>
+    </div>
+</body>
+
+</html>

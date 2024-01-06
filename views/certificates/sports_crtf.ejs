@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>sports</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 297mm;
+            /* A4 width including border */
+            height: 210mm;
+            /* A4 height including border */
+            border: 20px solid #6874cd;
+            /* Border style and color */
+            padding: 20px;
+            /* Padding inside the border */
+            box-sizing: border-box;
+            margin: 0 auto;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .event-details {
+            margin-top: 50px;
+        }
+
+        .signature {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Certificate of Achievement in Sports</h1>
+
+        <div class="event-details">
+            <p>This is to certify that</p>
+            <h2><strong><span id="name">
+                        <%= name %>
+                    </span></strong></h2>
+            <p>has successfully participated in the event</p>
+            <h3><strong><span id="eventName">
+                        <%= event %>
+                    </span></strong></h3>
+            <p>held on</p>
+            <p><span id="date">
+                    <%= date %>
+                </span></p>
+        </div>
+
+        <div class="signature">
+            <p><u>
+                    <%= signature %>
+                </u></p>
+            <p>Authorized Signature</p>
+        </div>
+    </div>
+</body>
+
+</html>

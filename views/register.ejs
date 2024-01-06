@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 0;
+      overflow: hidden;
+      /* Hide body overflow to prevent scrollbars */
+    }
+
+    #canvas-container {
+      position: absolute;
+      left: 35%;
+      z-index: 1;
+      opacity: 0.9;
+      /* Set z-index to -1 to position the canvas behind other elements */
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      min-width: 450px;
+      margin: 50px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input:hover {
+      border-color: #3e0ae8;
+      box-shadow: 0 20 10px #340bbd;
+    }
+
+    #crtbtn {
+      color: #007bff;
+      background-color: #fff;
+      padding: 6px 20px;
+      border-radius: 8px;
+      border: 2px solid #007bff;
+      cursor: pointer;
+    }
+
+    #crtbtn:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .error-message {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Media Queries for Responsive Design */
+
+    @media (max-width: 600px) {
+      form {
+        max-width: 90%;
+        /* Adjusted maximum width for smaller screens */
+      }
+    }
+
+    @media (max-width: 400px) {
+      input {
+        font-size: 14px;
+        /* Adjusted font size for smaller screens */
+      }
+
+      button {
+        font-size: 16px;
+        /* Adjusted font size for smaller screens */
+      }
+
+      .btn-go-back {
+        margin-top: 5px;
+        /* Adjusted margin for smaller screens */
+      }
+
+      .error-message {
+        font-size: 14px;
+        /* Adjusted font size for smaller screens */
+        margin-top: 5px;
+        /* Adjusted margin for smaller screens */
+        margin-bottom: 5px;
+        /* Adjusted margin for smaller screens */
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="canvas-container">
+
+    <form action="/register" method="post">
+      <h1>Register Staff</h1>
+      <br>
+      <label for="name"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#007bff"
+          class="bi bi-person-circle" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+          <path fill-rule="evenodd"
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+        </svg>
+        &nbsp;&nbsp;Username</label>
+      <input type="text" id="name" name="name" placeholder="Username" required>
+      <br>
+
+      <label for="email"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#007bff"
+          class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+          <path
+            d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671" />
+          <path
+            d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z" />
+        </svg>
+        &nbsp;&nbsp;Email</label>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+
+      <label for="password"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#007bff"
+          class="bi bi-lock-fill" viewBox="0 0 16 16">
+          <path
+            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2" />
+        </svg>
+        &nbsp;Password</label>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <br>
+
+      <% if (errorMessage) { %>
+        <p class="error-message">
+          <%- errorMessage %>
+        </p>
+        <% } %>
+
+          <button type="submit" id="crtbtn">Create Staff</button>
+    </form>
+  </div>
+
+
+
+  <script type="x-shader/x-vertex" id="shader-vertex">
+    uniform float mRefractionRatio;
+    uniform float mFresnelBias;
+    uniform float mFresnelScale;
+    uniform float mFresnelPower;
+    
+    varying vec3 vReflect;
+    varying vec3 vRefract[3];
+    varying float vReflectionFactor;
+    
+    void main() {
+      vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+      vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+    
+      vec3 worldNormal = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
+    
+      vec3 I = worldPosition.xyz - cameraPosition;
+    
+      vReflect = reflect( I, worldNormal );
+      vRefract[0] = refract( normalize( I ), worldNormal, mRefractionRatio );
+      vRefract[1] = refract( normalize( I ), worldNormal, mRefractionRatio * 0.99 );
+      vRefract[2] = refract( normalize( I ), worldNormal, mRefractionRatio * 0.98 );
+      vReflectionFactor = mFresnelBias + mFresnelScale * pow( 1.0 + dot( normalize( I ), worldNormal ), mFresnelPower );
+    
+      gl_Position = projectionMatrix * mvPosition;
+    }
+    </script>
+
+  <script type="x-shader/x-fragment" id="shader-fragment">
+    uniform samplerCube tCube;
+    
+    varying vec3 vReflect;
+    varying vec3 vRefract[3];
+    varying float vReflectionFactor;
+    
+    void main() {
+      vec4 reflectedColor = textureCube( tCube, vec3( -vReflect.x, vReflect.yz ) );
+      vec4 refractedColor = vec4( 1.0 );
+    
+      refractedColor.r = textureCube( tCube, vec3( -vRefract[0].x, vRefract[0].yz ) ).r;
+      refractedColor.g = textureCube( tCube, vec3( -vRefract[1].x, vRefract[1].yz ) ).g;
+      refractedColor.b = textureCube( tCube, vec3( -vRefract[2].x, vRefract[2].yz ) ).b;
+    
+      gl_FragColor = mix( refractedColor, reflectedColor, clamp( vReflectionFactor, 0.0, 1.0 ) );
+    }
+    </script>
+
+
+  <script>
+    class App {
+      constructor() {
+        this.camera = new THREE.PerspectiveCamera(
+          50,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          100000
+        );
+        this.scene;
+        this.renderer;
+
+        this.spheres = [];
+
+        this.windowHalfX = window.innerWidth / 2;
+        this.windowHalfY = window.innerHeight / 2;
+
+        this.init();
+        this.animate();
+      }
+      init() {
+        this.camera.position.z = 10;
+        this.camera.position.x = -10;
+
+        const path =
+          "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1147877/winter-hdri_";
+        const format = ".png";
+        const order = ["px", "nx", "py", "ny", "pz", "nz"];
+        const urls = [];
+        order.forEach(side => {
+          urls.push(`${path}${side}${format}`);
+        });
+        const textureCube = new THREE.CubeTextureLoader().load(urls);
+        textureCube.format = THREE.RGBFormat;
+
+        this.scene = new THREE.Scene();
+        this.scene.background = textureCube;
+
+        const sphereGeometry = new THREE.SphereBufferGeometry(5, 16, 16);
+        const icosaGeometry = new THREE.IcosahedronBufferGeometry(7);
+        const shader = {
+          uniforms: {
+            mRefractionRatio: { value: 1.02 },
+            mFresnelBias: { value: 0.1 },
+            mFresnelPower: { value: 2.0 },
+            mFresnelScale: { value: 1.0 },
+            tCube: { value: null }
+          },
+          vertexShader: document.querySelector("#shader-vertex").textContent,
+          fragmentShader: document.querySelector("#shader-fragment").textContent
+        };
+        const uniforms = THREE.UniformsUtils.clone(shader.uniforms);
+
+        uniforms["tCube"].value = textureCube;
+
+        const material = new THREE.ShaderMaterial({
+          uniforms,
+          vertexShader: shader.vertexShader,
+          fragmentShader: shader.fragmentShader
+        });
+
+        const bigMesh = new THREE.Mesh(sphereGeometry, material);
+
+        this.scene.add(bigMesh);
+        this.spheres.push(bigMesh);
+
+        for (let i = 0; i < 20; i++) {
+          const mesh = new THREE.Mesh(icosaGeometry, material);
+          mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.1;
+          this.scene.add(mesh);
+          this.spheres.push(mesh);
+        }
+
+        this.scene.matrixAutoUpdate = false;
+
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(this.renderer.domElement);
+
+        window.addEventListener("resize", this.onWindowResize, false);
+      }
+      onWindowResize() {
+        this.windowHalfX = window.innerWidth / 2;
+        this.windowHalfY = window.innerHeight / 2;
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+      animate() {
+        requestAnimationFrame(this.animate.bind(this));
+
+        this.render();
+      }
+      render() {
+        const timer = 0.001 * Date.now();
+        this.camera.lookAt(this.scene.position);
+        this.camera.position.x = Math.sin(timer / 3) * -20;
+        this.camera.position.z = Math.cos(timer / 3) * 20;
+        let angle = 0;
+        const step = 2 * Math.PI / 10;
+        for (let i = 0; i < this.spheres.length; i++) {
+          const sphere = this.spheres[i];
+          if (i > 0) {
+            sphere.position.y = Math.sin(timer + angle) * Math.cos(timer);
+            sphere.position.x = Math.cos(timer + angle) * 10;
+            sphere.position.z = Math.sin(timer + angle) * 10;
+          } else {
+            sphere.rotation.x = Math.cos(timer * -1);
+            sphere.rotation.y = Math.sin(timer * -1);
+          }
+          angle += step;
+        }
+        this.renderer.render(this.scene, this.camera);
+      }
+    }
+    new App();
+
+  </script>
+
+</body>
+
+</html>

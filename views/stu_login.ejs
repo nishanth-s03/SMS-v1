@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>  -->
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4e8e8;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container:hover {
+            box-shadow: 0 20px 30px rgba(48, 70, 235, 0.2);
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .form-group input:hover {
+            border-color: #3e0ae8;
+        }
+
+        .form-group button {
+            background-color: #fff;
+            color: rgb(26, 20, 20);
+            font-weight: bold;
+            border: 1px solid rgb(22, 142, 22);
+            width: 50%;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+            color: #fff;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #scene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .login-container {
+            width: 400px;
+            height: 430px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="scene"></canvas>
+
+    <div class="login-container">
+        <h1>Student Login</h1>
+        <br>
+        <form action="/stu_login" method="post">
+            <div class="form-group">
+                <label for="usn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                    &nbsp;&nbsp;USN
+                </label>
+                <input type="string" id="usn" name="usn" placeholder="USN" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                    </svg>
+                    &nbsp;DOB
+                </label>
+                <input type="date" id="dob" name="dob" placeholder="DD/MM/YYYY" required>
+            </div>
+
+            <!-- Display error message if there is one -->
+            <% if (errorMessage) { %>
+                <p class="error-message">
+                    <%= errorMessage %>
+                </p>
+                <% } %>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit">Login</button>
+                    </div>
+
+                    <p>Without Addmission You Can't Login :<a href="/home">Home</a></p>
+        </form>
+    </div>
+
+    <script>
+        var ww = window.innerWidth,
+            wh = window.innerHeight;
+
+        function init() {
+            /* WEBGL RENDERER */
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('scene') });
+            renderer.setSize(ww, wh);
+
+            /* SCENE */
+            scene = new THREE.Scene();
+
+            /* CAMERA */
+            camera = new THREE.OrthographicCamera(ww / -2, ww / 2, wh / 2, wh / -2, 0, 1000);
+            camera.position.set(0, 0, 200);
+            scene.add(camera);
+
+            /* LIGHT */
+            light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(0, 0, 1);
+            scene.add(light);
+
+            // particles will be the 3D object containing all the particles
+            particles = new THREE.Object3D();
+            scene.add(particles);
+
+            // Add events listeners on the page
+            document.addEventListener("mousemove", mouseMove);
+            document.addEventListener("touchmove", mouseMove);
+
+            // Init request animation frame
+            animate();
+        };
+
+        // Init var with mouse position
+        var mouse = { x: 0, y: 0 };
+        function mouseMove(e) {
+            // 3D universe comes from the center, so I subtract half of the screen on the mouse position
+            // By doing that, the cursor on the left will give -window/2 and on the right window/2
+            // For the Y axis, it's a bit different because the top equals 0, but in the scene, the top is the positive side
+            mouse.x = e.clientX - (ww / 2);
+            mouse.y = (wh / 2) - e.clientY;
+        };
+
+        function createParticle() {
+            // Create a geometry used for the particles which contains nothing for now
+            var geometry = new THREE.Geometry();
+            // Create a vector which is equal to the mouse position
+            var vertices = new THREE.Vector3(
+                mouse.x,
+                mouse.y,
+                -10
+            );
+            // Apply our vector inside the geometry
+            geometry.vertices.push(vertices);
+            // Create a white material
+            // sizeAttenuation defines if the particle will be small if far from the camera
+            var material = new THREE.PointsMaterial({
+                color: 0XffA500,  //0X00ff00
+                size: 8,
+                transparent: true,
+                sizeAttenuation: false
+            });
+            // Point cloud is a specific Mesh for particles
+            particle = new THREE.Points(geometry, material);
+            // Create a random speed for each particle for aesthetics
+            particle.speed = Math.random() / 100 + 0.003
+            // Set a random position for each particle
+            particle.direction = {
+                x: (Math.random() - 0.5) * ww * 3,
+                y: (Math.random() - 0.5) * wh * 3
+            };
+
+            particles.add(particle);
+        }
+
+        var animate = function () {
+            requestAnimationFrame(animate);
+
+            // Create a new particle
+            createParticle();
+
+            // We loop through all our particles
+            for (var i = 0, j = particles.children.length; i < j; i++) {
+                // Get the next particle
+                var particle = particles.children[i];
+
+                // Move our particle closer to its destination
+                particle.geometry.vertices[0].x += (particle.direction.x - particle.geometry.vertices[0].x) * particle.speed;
+                particle.geometry.vertices[0].y += (particle.direction.y - particle.geometry.vertices[0].y) * particle.speed;
+                // Reduce the opacity of the particle
+                particle.material.opacity -= 0.005;
+                // Prevent ThreeJs the particle has moved
+                particle.geometry.verticesNeedUpdate = true;
+
+                // If the opacity of the particle is too low
+                if (particle.material.opacity < 0.05) {
+                    // Remove our particle from the scene
+                    particles.remove(particle);
+                    // The loop must go through the same 'i' because we removed one particle from the array
+                    i--;
+                    j--;
+                }
+            }
+
+            renderer.render(scene, camera);
+        };
+
+        init();
+    </script>
+
+</body>
+
+</html>
